@@ -25,10 +25,13 @@
                 const l = document.getElementById("lokasi");
                 const n = document.getElementById("negara");
                 const t = document.getElementById("tipe");
+                const k = document.getElementById("koordinat");
                 let lokasi = data.features[0].matching_place_name;
                 let negara = data.features[0].matching_text;
+                let tipe = data.features[0].type;
                 l.innerHTML = lokasi;
                 n.innerHTML = negara;
+                t.innerHTML = tipe;
             },
             error : function(error){
                 console.log(error);
