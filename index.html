@@ -11,7 +11,7 @@
     <h3>NIM : 20240140204</h3>
 
     <div style="margin-bottom: 20px;">
-        <input type="text" id="inputKota" placeholder="Masukkan nama kota..." value="Cari Kota Kamu Disini">
+        <input type="text" id="inputKota" placeholder="Masukkan nama kota...">
         <button id="btnCari">Cari Lokasi</button>
     </div>
 
@@ -26,34 +26,37 @@
             if(kota === ""){
                 alert("Masukkan nama kota terlebih dahulu!");
                 return;
+            }
             
-        const urlapi = "https://api.maptiler.com/geocoding/" + kota + ".json?key=4cMB0JsLdv6EmJDeuMGm";
-        $.ajax({
-            url : urlapi,
-            method : "GET",
-            success : function(data){
-                console.log(data);
-                const l = document.getElementById("lokasi");
-                const k = document.getElementById("kota");
-                const t = document.getElementById("tipe");
-                const c = document.getElementById("coordinat");
-                let lokasi = data.features[0].matching_place_name;
-                let kota = data.features[0].matching_text;
-                let tipe = data.features[0].type;
-                let coordinat = data.features[0].geometry.coordinates;
-                l.innerHTML = lokasi;
-                k.innerHTML = kota;
-                t.innerHTML = tipe;
-                c.innerHTML = coordinat;
-            },
-            error : function(error){
+            const urlapi = "https://api.maptiler.com/geocoding/" + kota + ".json?key=4cMB0JsLdv6EmJDeuMGm";
+            $.ajax({
+                url : urlapi,
+                method : "GET",
+                success : function(data){
+                    console.log(data);
+                    const l = document.getElementById("lokasi");
+                    const k = document.getElementById("kota");
+                    const t = document.getElementById("tipe");
+                    const c = document.getElementById("coordinat");
+                    if(data.features.length > 0){
+                        let lokasi = data.features[0].matching_place_name;
+                        let kota = data.features[0].matching_text;
+                        let tipe = data.features[0].type;
+                        let coordinat = data.features[0].geometry.coordinates;
+                        l.innerHTML = lokasi;
+                        k.innerHTML = kota;
+                        t.innerHTML = tipe;
+                        c.innerHTML = coordinat;
+                    } else {
+                        alert("Data tidak ditemukan!");
+                    }
+                },
+                error : function(error){
                 console.log(error);
             }
         });    
         }
-        }
         document.getElementById("btnCari").addEventListener("click", cariData);
-        cariData();    
     </script>
 </body>
 </html>
