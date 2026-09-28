@@ -24,8 +24,8 @@
                 console.log(data);
                 const l = document.getElementById("lokasi");
                 const n = document.getElementById("negara");
-                let lokasi = data.features[0].matching_text;
-                let negara = data.features[0].context[1].text;
+                let lokasi = data.features[0].matching_place_name;
+                let negara = data.features[0].matching_text;
                 l.innerHTML = lokasi;
                 n.innerHTML = negara;
             },
