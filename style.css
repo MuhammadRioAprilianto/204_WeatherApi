@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================
+   CSS Variables
+   ============================================ */
+:root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --accent: #06b6d4;
+    --card-bg: rgba(255, 255, 255, 0.07);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255, 255, 255, 0.05);
+    --text-primary: #f1f5f9;
+    --text-muted: #64748b;
+}
+
+/* ============================================
+   Reset
+   ============================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   Background (html)
+   ============================================ */
+html {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1a1a2e 100%);
+    background-attachment: fixed;
+}
+
+/* Efek glow halus bergerak di background */
+html::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    animation: bgShift 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes bgShift {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    50%  { transform: translate(-3%, 3%) rotate(1deg); }
+    100% { transform: translate(3%, -2%) rotate(-1deg); }
+}
+
+/* ============================================
+   Card Utama (body sebagai card)
+   ============================================ */
+body {
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: 50px auto;
+    padding: 40px 32px;
+    background: var(--card-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    box-shadow:
+        0 25px 60px -15px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    animation: cardSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes cardSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Garis gradient dekoratif di atas card */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    right: 32px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+    border-radius: 0 0 4px 4px;
+    opacity: 0.8;
+}
+
+/* ============================================
+   Nama & NIM (h3)
+   ============================================ */
+h3 {
+    text-align: center;
+    margin: 4px 0;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* Nama */
+h3:nth-of-type(1) {
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 12px;
+}
+
+/* NIM */
+h3:nth-of-type(2) {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   Search Box (div wrapper)
+   ============================================ */
+div[style*="margin-bottom: 20px"] {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px !important;
+    background: var(--glass);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+div[style*="margin-bottom: 20px"]:focus-within {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   Input Kota
+   ============================================ */
+#inputKota {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    font-weight: 400;
+    min-width: 0;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+#inputKota::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* ============================================
+   Tombol Cari
+   ============================================ */
+#btnCari {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 13px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* Shimmer effect saat hover */
+#btnCari::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+#btnCari:hover::after {
+    left: 100%;
+}
+
+#btnCari:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+#btnCari:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================
+   Hasil Data — tag <p>
+   ============================================ */
+p {
+    display: block;
+    margin: 6px 0 18px 0;
+    padding: 14px 16px;
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 14px;
+    min-height: 48px;
+    text-transform: none;
+    letter-spacing: normal;
+    transition: all 0.3s ease;
+    word-break: break-word;
+}
+
+p:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateX(4px);
+}
+
+/* Warna aksen kiri per field */
+#lokasi {
+    border-left: 3px solid #f87171;
+}
+
+#kota {
+    border-left: 3px solid var(--primary-light);
+}
+
+#tipe {
+    border-left: 3px solid #fbbf24;
+}
+
+#coordinat {
+    border-left: 3px solid var(--accent);
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   Text Selection
+   ============================================ */
+::selection {
+    background: rgba(99, 102, 241, 0.4);
+    color: white;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 560px) {
+    body {
+        margin: 20px 12px;
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+
+    h3:nth-of-type(1) {
+        font-size: 18px;
+    }
+
+    #btnCari {
+        padding: 13px 16px;
+        font-size: 13px;
+    }
+}
