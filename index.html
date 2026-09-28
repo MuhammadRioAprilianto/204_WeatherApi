@@ -41,7 +41,7 @@
                     if(data.features.length > 0){
                         let lokasi = data.features[0].matching_place_name;
                         let kota = data.features[0].matching_text;
-                        let tipe = data.features[0].type;
+                        let tipe = data.features[0].place_type_name;
                         let coordinat = data.features[0].geometry.coordinates;
                         l.innerHTML = lokasi;
                         k.innerHTML = kota;
