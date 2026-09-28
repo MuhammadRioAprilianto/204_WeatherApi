@@ -29,9 +29,11 @@
                 let lokasi = data.features[0].matching_place_name;
                 let negara = data.features[0].matching_text;
                 let tipe = data.features[0].type;
+                let koordinat = data.features[0].geometry.coordinates;
                 l.innerHTML = lokasi;
                 n.innerHTML = negara;
                 t.innerHTML = tipe;
+                k.innerHTML = koordinat;
             },
             error : function(error){
                 console.log(error);
