@@ -10,10 +10,10 @@
     <h3>Nama : Muhammad Rio Aprilianto</h3>
     <h3>NIM : 20240140204</h3>
 
-    lokasi : <p id="lokasi"></p>
-    negara : <p id="negara"></p>
-    tipe : <p id="tipe"></p>
-    koordinat : <p id="koordinat"></p>
+    Lokasi : <p id="lokasi"></p>
+    Kota : <p id="kota"></p>
+    Tipe : <p id="tipe"></p>
+    Koordinat : <p id="coordinat"></p>
 
     <script>
         const kota = "jakarta";
@@ -24,17 +24,17 @@
             success : function(data){
                 console.log(data);
                 const l = document.getElementById("lokasi");
-                const n = document.getElementById("negara");
+                const k = document.getElementById("kota");
                 const t = document.getElementById("tipe");
-                const k = document.getElementById("koordinat");
+                const c = document.getElementById("coordinat");
                 let lokasi = data.features[0].matching_place_name;
-                let negara = data.features[0].matching_text;
+                let kota = data.features[0].matching_text;
                 let tipe = data.features[0].type;
-                let koordinat = data.features[0].geometry.coordinates;
+                let coordinat = data.features[0].geometry.coordinates;
                 l.innerHTML = lokasi;
-                n.innerHTML = negara;
+                k.innerHTML = kota;
                 t.innerHTML = tipe;
-                k.innerHTML = koordinat;
+                c.innerHTML = coordinat;
             },
             error : function(error){
                 console.log(error);
