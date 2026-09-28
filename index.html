@@ -10,13 +10,23 @@
     <h3>Nama : Muhammad Rio Aprilianto</h3>
     <h3>NIM : 20240140204</h3>
 
+    <div style="margin-bottom: 20px;">
+        <input type="text" id="inputKota" placeholder="Masukkan nama kota..." value="Cari Kota Kamu Disini">
+        <button id="btnCari">Cari Lokasi</button>
+    </div>
+
     Lokasi : <p id="lokasi"></p>
     Kota : <p id="kota"></p>
     Tipe : <p id="tipe"></p>
     Koordinat : <p id="coordinat"></p>
 
     <script>
-        const kota = "jakarta";
+        function cariData(){
+            const kota = document.getElementById("inputKota").value;
+            if(kota === ""){
+                alert("Masukkan nama kota terlebih dahulu!");
+                return;
+            
         const urlapi = "https://api.maptiler.com/geocoding/" + kota + ".json?key=4cMB0JsLdv6EmJDeuMGm";
         $.ajax({
             url : urlapi,
@@ -39,8 +49,11 @@
             error : function(error){
                 console.log(error);
             }
-
-        });
+        });    
+        }
+        }
+        document.getElementById("btnCari").addEventListener("click", cariData);
+        cariData();    
     </script>
 </body>
 </html>
